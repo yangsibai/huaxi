@@ -17,6 +17,10 @@
     "64": "icons/64.png",
     "128": "icons/128.png"
   },
+  "browser_action": {
+    "default_title": "华西预约查询",
+    "default_icon": "icons/48.png"
+  },
   "background": {
     "scripts": [
       "lib/jquery-2.0.3.min.js",

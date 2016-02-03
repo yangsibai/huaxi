@@ -81,3 +81,8 @@ function go() {
 }
 
 go();
+
+
+chrome.browserAction.onClicked.addListener(function (tab) {
+    window.open(chrome.extension.getURL('config.html'))
+});

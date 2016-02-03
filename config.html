@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>配置</title>
+  <style>
+    input {
+      text-align: right;
+      width: 50px;
+      margin-right: 3px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100px;
+      height: 32px;
+    }
+  </style>
+</head>
+<body>
+<h1>配置</h1>
+<div>
+  <h2>医生</h2>
+<textarea id="doctors" cols="100" rows="10" placeholder="填写医生名字和查询地址, 以逗号隔开, 每行一个, 如:
+段荫乔,http://www.cd120.com/doctorByCode.jspx?doctorCode=0086&clinnicId=246
+贺建清,http://www.cd120.com/doctorByCode.jspx?doctorCode=11021&clinnicId=246
+"></textarea>
+</div>
+<div>
+  <h2>查询时间间隔随机范围</h2>
+  <input id="min" type="number" value="30">秒
+  <span>～</span>
+  <input id="max" type="number" value="600">秒
+</div>
+<div>
+  <button id="save">保存</button>
+</div>
+<script src="lib/jquery-2.0.3.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var $doctors = $('#doctors');
+    var $min = $('#min');
+    var $max = $('#max');
+    var $btn = $('#save');
+    $btn.click(function () {
+      var doctors = $doctors.text();
+      var min = $min.value;
+      var max = $max.value;
+      console.log(doctors, min, max);
+    });
+  });
+</script>
+</body>
+</html>
