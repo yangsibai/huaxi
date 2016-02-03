@@ -1,0 +1,26 @@
+{
+  "name": "Huaxi",
+  "manifest_version": 2,
+  "version": "0.0.1",
+  "description": "Make an appointment of huaxi's doctor.",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "http://*.cd120.com/*",
+    "notifications"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "24": "icons/24.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-2.0.3.min.js",
+      "index.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "icons/paperfly.png"
+  ]
+}
