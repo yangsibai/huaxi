@@ -1,5 +1,4 @@
 'use strict';
-var re2 = /events: (.*)/ig;
 var baseUrl = 'http://www.cd120.com/';
 var doctors = [
     {
@@ -13,9 +12,12 @@ var doctors = [
 ];
 
 function resolve(s) {
-    var matches = re2.exec(s);
-    if (matches.length > 1) {
+    var re = /events: (.*)/ig;
+    var matches = re.exec(s);
+    if (matches && matches.length > 1) {
         return eval(matches[1]);
+    } else {
+        console.warn('没有找到 events 信息');
     }
 }
 
@@ -62,13 +64,20 @@ function check(doctor) {
 
 var count = 0;
 
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 function go() {
-    count++;
     var index = count % doctors.length;
     var doctor = doctors[index];
-    console.log('第 ' + count + '次检查, 此次检查 ' + doctor.name, new Date());
+    var nextTimeout = parseInt(getRandomArbitrary(1000 * 20, 1000 * 60 * 3));
+    count++;
+    console.log('第 ' + count + ' 次检查, 此次检查 ' + doctor.name, new Date(), ' 下次检查将于 ' + nextTimeout / 1000 + ' 秒后进行');
     check(doctor);
-    setTimeout(go, 3 * 60 * 1000);
+    setTimeout(function () {
+        go();
+    }, nextTimeout);
 }
 
 go();
