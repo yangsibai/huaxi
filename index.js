@@ -1,15 +1,5 @@
 'use strict';
 var baseUrl = 'http://www.cd120.com/';
-var doctors = [
-    {
-        name: '段荫乔',
-        url: 'http://www.cd120.com/doctorByCode.jspx?doctorCode=0086&clinnicId=246'
-    },
-    {
-        name: '贺建清',
-        url: 'http://www.cd120.com/doctorByCode.jspx?doctorCode=11021&clinnicId=246'
-    }
-];
 
 function resolve(s) {
     var re = /events: (.*)/ig;
@@ -17,7 +7,10 @@ function resolve(s) {
     if (matches && matches.length > 1) {
         return eval(matches[1]);
     } else {
-        console.warn('没有找到 events 信息');
+        store.log({
+            type: 'warn',
+            message: '没有找到 events 信息'
+        });
     }
 }
 
@@ -56,24 +49,28 @@ function check(doctor) {
                 }
             });
             if (!available) {
-                console.warn('没有找到可用的预约时间');
+                store.log({
+                    type: 'warn',
+                    message: '没有找到可用的预约时间'
+                });
             }
         }
     });
 }
-
-var count = 0;
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
 function go() {
-    var index = count % doctors.length;
-    var doctor = doctors[index];
-    var nextTimeout = parseInt(getRandomArbitrary(1000 * 20, 1000 * 60 * 3));
-    count++;
-    console.log('第 ' + count + ' 次检查, 此次检查 ' + doctor.name, new Date(), ' 下次检查将于 ' + nextTimeout / 1000 + ' 秒后进行');
+    var index = store.count % store.doctors.length;
+    var doctor = store.doctors[index];
+    var nextTimeout = parseInt(getRandomArbitrary(store.min * 1000, store.max * 1000));
+    store.count++;
+    store.log({
+        type: 'log',
+        message: '第 ' + store.count + ' 次检查, 此次检查 ' + doctor.name + ' 下次检查将于 ' + nextTimeout / 1000 + ' 秒后进行'
+    });
     check(doctor);
     setTimeout(function () {
         go();
