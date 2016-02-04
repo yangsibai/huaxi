@@ -5,6 +5,7 @@ $(document).ready(function () {
     var $max = $('#max');
     var $btn = $('#save');
     var $logs = $('#logs');
+    var $btnClear = $('#clear');
 
     function loadData() {
         var doctors = store.doctors;
@@ -42,6 +43,12 @@ $(document).ready(function () {
         loadData();
     });
 
+    $btnClear.click(function () {
+        store.count = 0;
+        store.clearLogs();
+        tick();
+    });
+
     var $count = $('#count');
 
     function tick() {
@@ -49,8 +56,26 @@ $(document).ready(function () {
         var logs = store.logs;
         $logs.empty();
         logs.forEach(function (log) {
-            $logs.append($(`<li>${log.time} ${log.message}</li>`))
+            $logs.append($(`<li>${getReadableTime(log.time)} ${log.message}</li>`))
         });
+        console.log($logs[0].scrollHeight);
+        $logs.animate({
+            scrollTop: $logs[0].scrollHeight
+        }, 'slow');
+    }
+
+    function getReadableTime(dateStr) {
+        var time = new Date(dateStr);
+        return `${time.getFullYear()}-${getMonth(time)}-${addPrefixZero(time.getDate())} ${addPrefixZero(time.getHours())}:${addPrefixZero(time.getMinutes())}:${addPrefixZero(time.getSeconds())}`
+    }
+
+    function getMonth(date) {
+        var mon = date.getMonth() + 1;
+        return addPrefixZero(mon);
+    }
+
+    function addPrefixZero(val) {
+        return val < 10 ? '0' + val : val;
     }
 
     tick();

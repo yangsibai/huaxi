@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>华西挂号预约查询</title>
   <style>
+    html, body {
+      font-family: "Segoe UI", "Microsoft YaHei", "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", sans-serif;;
+    }
+
     input {
       text-align: right;
       width: 50px;
@@ -11,24 +15,43 @@
     }
 
     button {
-      margin-top: 20px;
-      width: 100px;
-      height: 32px;
+      margin: 5px 0;
+      width: 80px;
+      height: 24px;
+      background-color: #1572D2;
+      outline: none;
+      border: none;
+      color: #FFF;
+    }
+
+    ul {
+      height: 300px;
+      overflow: auto;
+    }
+
+    ul li {
+      line-height: 1.6em;
+    }
+
+    h4 {
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
+<h2>华西挂号预约查询</h2>
+<p>本软件只查询可用预约, 不登录, 不自动挂号</p>
 <div>
-  <h1>配置</h1>
+  <h3>配置</h3>
   <div>
-    <h2>医生</h2>
+    <h4>医生</h4>
 <textarea id="doctors" cols="100" rows="10" placeholder="填写医生名字和查询地址, 以逗号隔开, 每行一个, 如:
 段荫乔,http://www.cd120.com/doctorByCode.jspx?doctorCode=0086&clinnicId=246
 贺建清,http://www.cd120.com/doctorByCode.jspx?doctorCode=11021&clinnicId=246
 "></textarea>
   </div>
   <div>
-    <h2>查询时间间隔随机范围</h2>
+    <h4>查询时间间隔随机范围</h4>
     <input title="min" id="min" type="number" value="">秒
     <span>～</span>
     <input title="max" id="max" type="number" value="">秒
@@ -38,13 +61,13 @@
   </div>
 </div>
 <div>
-  <h1>记录</h1>
+  <h3>日志</h3>
   <div>
-    <span>查询次数 <b id="count"></b></span>
-  </div>
-  <div>
-    <h2>日志</h2>
-    <ul id="logs"></ul>
+    <div>
+      <span>查询次数 <b id="count"></b></span>
+      <ul id="logs"></ul>
+    </div>
+    <button id="clear">清理</button>
   </div>
 </div>
 <script src="lib/jquery-2.0.3.min.js"></script>

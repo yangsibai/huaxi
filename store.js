@@ -45,10 +45,13 @@ var store = {
     get logs() {
         return LS.logs && JSON.parse(LS.logs) || [];
     },
+    clearLogs: function () {
+        LS.logs = '';
+    },
     log: function (msg) {
         var logs = this.logs;
         msg.time = new Date();
-        logs.unshift(msg);
+        logs.push(msg);
         LS.logs = JSON.stringify(logs);
     }
 };
