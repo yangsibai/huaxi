@@ -22,7 +22,7 @@ $(document).ready(function () {
     loadData();
 
     $btn.click(function () {
-        var doctors = $doctors.val();
+        var doctors = $doctors.val().trim();
         var min = $min.val();
         var max = $max.val();
         if (doctors) {
@@ -58,7 +58,6 @@ $(document).ready(function () {
         logs.forEach(function (log) {
             $logs.append($(`<li>${getReadableTime(log.time)} ${log.message}</li>`))
         });
-        console.log($logs[0].scrollHeight);
         $logs.animate({
             scrollTop: $logs[0].scrollHeight
         }, 'slow');

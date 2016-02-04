@@ -30,11 +30,25 @@ function notify(event, doctor) {
     chrome.notifications.create({
         type: 'basic',
         iconUrl: '/icons/48.png',
-        title: '可以预约「' + doctor.name + '」',
-        message: event.start
+        title: '点击预约「' + doctor.name + '」',
+        message: getReadableDate(event.start)
     }, function (notificationId) {
         notifications[notificationId] = event;
     });
+}
+
+function getReadableDate(dateStr) {
+    var time = new Date(dateStr);
+    return `${time.getFullYear()}-${getMonth(time)}-${addPrefixZero(time.getDate())}`
+}
+
+function getMonth(date) {
+    var mon = date.getMonth() + 1;
+    return addPrefixZero(mon);
+}
+
+function addPrefixZero(val) {
+    return val < 10 ? '0' + val : val;
 }
 
 function check(doctor) {
