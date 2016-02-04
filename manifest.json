@@ -1,8 +1,8 @@
 {
-  "name": "Huaxi",
+  "name": "华西医生预约查询",
   "manifest_version": 2,
-  "version": "0.0.1",
-  "description": "Make an appointment of huaxi's doctor.",
+  "version": "0.0.2",
+  "description": "只查询医生可用预约, 不登录, 不自动挂号",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
     "http://*.cd120.com/*",
